@@ -1,21 +1,37 @@
 package com.leo.bockstore.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class livro {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class Livro implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
 	private String nome_autor;
 	private String texto;
 	
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-	public livro() {
+	public Livro() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public livro(Integer id, String titulo, String nome_autor, String texto, Categoria categoria) {
+	public Livro(Integer id, String titulo, String nome_autor, String texto, Categoria categoria) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -77,7 +93,7 @@ public class livro {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		livro other = (livro) obj;
+		Livro other = (Livro) obj;
 		return Objects.equals(id, other.id);
 	}
 	
